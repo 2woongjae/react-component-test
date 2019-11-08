@@ -21,8 +21,10 @@ describe("Button 컴포넌트 (@testing-library/react)", () => {
   it(`버튼을 클릭하면, p 태그 안에 "버튼이 방금 눌렸다." 라고 쓰여진다.`, () => {
     const { getByText } = render(<Button />);
 
-    const button = getByText("button");
-    fireEvent.click(button);
+    act(() => {
+      const button = getByText("button");
+      fireEvent.click(button);
+    });
 
     const p = getByText("버튼이 방금 눌렸다.");
     expect(p).not.toBeNull();
@@ -40,8 +42,10 @@ describe("Button 컴포넌트 (@testing-library/react)", () => {
   it(`버튼을 클릭하고 5초 뒤에는, p 태그 안에 "버튼이 눌리지 않았다." 라고 쓰여진다.`, () => {
     const { getByText } = render(<Button />);
 
-    const button = getByText("button");
-    fireEvent.click(button);
+    act(() => {
+      const button = getByText("button");
+      fireEvent.click(button);
+    });
 
     act(() => {
       jest.advanceTimersByTime(5000);
@@ -56,7 +60,9 @@ describe("Button 컴포넌트 (@testing-library/react)", () => {
     const { getByText } = render(<Button />);
 
     const button = getByText("button");
-    fireEvent.click(button);
+    act(() => {
+      fireEvent.click(button);
+    });
 
     expect(button).toBeDisabled();
 
